@@ -28,6 +28,7 @@ if(isset($_POST['login'])){
     if($password==$db_user_password && $username==$db_username ){
         //set session vars
       //  echo "hii";
+       // $_SESSION['username']=$db_username;
         $_SESSION['username']=$db_username;
         $_SESSION['firstname']=$db_user_firstname;
         $_SESSION['lastname']=$db_user_lastname;
