@@ -20,6 +20,9 @@ if(isset($_POST['submit'])){
     $query="INSERT INTO posts( post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags,  post_status) VALUES  ({$post_category_id},'{$post_title}','{$post_author}' ,now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}') ";
     $result=mysqli_query($connection,$query);
        confirmQuery($result);
+    //---PULL UP THE LAST CREATED ID IN DB----------
+    $get_post_id=mysqli_insert_id($connection);
+    echo "<p class='bg-success'>Post Created. <a href='../post.php?p_id={$get_post_id}'>View Post</a> or <a href='posts.php'>Edit other posts</a></p>";
 }
 
 ?>
@@ -56,7 +59,11 @@ if(isset($_POST['submit'])){
     
     <div class="form-group">
        <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
+        
+        <select name="post_status" id="">
+            <option value="published">published</option>
+            <option value="draft">draft</option>
+        </select>
     </div>
     
     <div class="form-group">

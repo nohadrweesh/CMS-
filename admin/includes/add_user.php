@@ -22,6 +22,7 @@ if(isset($_POST['submit'])){
     $query="INSERT INTO users(  username, user_password, user_firstname, user_lastname, user_email, user_role) VALUES  ('{$username}','{$user_password}' ,'{$user_firstname}','{$user_lastname}','{$user_email}','{$user_role}') ";
     $result=mysqli_query($connection,$query);
        confirmQuery($result);
+    echo" User has been created : "."<a href='users.php'>View all users</a>";
 }
 
 ?>

@@ -46,7 +46,7 @@
                 <img class="img-responsive" src="images/<?php echo $post_image;?>" alt="">
                 <hr>
                 <p><?php echo $post_content;?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                
 
                 <hr>
 
@@ -87,15 +87,15 @@ if(isset($_POST['create_comment'])){
                     <form action="" method="post" role="form">
                        <div class="form-group">
                            <label for="comment_author">Author</label>
-                           <input type="text" class="form-control " name="comment_author">
+                           <input type="text" class="form-control " name="comment_author" required>
                        </div>
                        <div class="form-group">
                            <label for="comment_email">Email</label>
-                           <input type="text" class="form-control " name="comment_email">
+                           <input type="text" class="form-control " name="comment_email" required>
                        </div>
                         <div class="form-group">
                            <label for="comment_content">Your comment</label>
-                            <textarea name="comment_content" class="form-control" rows="3"></textarea>
+                            <textarea name="comment_content" class="form-control" rows="3" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
                     </form>
