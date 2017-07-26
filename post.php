@@ -12,8 +12,14 @@
       <?php 
                 if(isset($_GET['p_id'])){
                     $get_post_id=$_GET['p_id'];
-                }
                 
+                //INCREASE post commentsnum
+                $query="UPDATE posts SET post_views_count=post_views_count+1  WHERE post_id=$get_post_id";
+               $result=mysqli_query($connection,$query);
+                if(!$result){
+                    die("Query failed" .mysqli_error($connection));
+                }
+                    
                     $query="SELECT * FROM posts WHERE post_id = {$get_post_id}";
                     $select_all_from_posts=mysqli_query($connection,$query);
                     while($row=mysqli_fetch_assoc($select_all_from_posts)){
@@ -51,7 +57,7 @@
                 <hr>
 
                 
-<?php  }   ?>
+<?php  }  } ?>
          
 
                 <!-- Pager -->
@@ -72,7 +78,7 @@ if(isset($_POST['create_comment'])){
         die("Query failed" .mysqli_error($connection));
     }
     
-    //INCREASE post commentsnum
+    //INCREASE post comments num
     $query="UPDATE posts SET post_comments_count=post_comments_count+1  WHERE post_id=$get_post_id";
    $result=mysqli_query($connection,$query);
     if(!$result){

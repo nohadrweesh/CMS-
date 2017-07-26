@@ -16,6 +16,19 @@ if(isset($_POST['submit'])){
     $user_role=$_POST['user_role'];
     //$user_date=date('d-m-y');
     
+    //-----PASSWORD ENCRYPTION-----------
+     $randSalt_query="SELECT randSalt FROM users";
+    $select_randsalt_query=mysqli_query($connection,$randSalt_query);
+    if(!$select_randsalt_query){
+        die("fetch randSalt value query failed".mysqli_error($connection));
+    }
+   
+    $row=mysqli_fetch_array($select_randsalt_query);
+    $salt=$row['randSalt'];
+    
+    //ENCRYPTION
+    $user_password=crypt($user_password,$salt);
+    
     
     //move_uploaded_file($post_image_temp,"../images/$post_image");
     

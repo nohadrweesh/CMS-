@@ -24,6 +24,9 @@ if(isset($_POST['login'])){
         $db_user_role=$row['user_role'];
         //echo "soo";
     }
+    
+     //REVERSE ENCRYPTION
+    $password=crypt($password,$db_user_password);
     //echo "soo";
     if($password==$db_user_password && $username==$db_username ){
         //set session vars

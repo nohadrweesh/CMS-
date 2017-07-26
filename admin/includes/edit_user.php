@@ -8,14 +8,20 @@ if(isset($_GET['u_id'])){
     while($row=mysqli_fetch_assoc($select_all_from_users)){
        // $row=mysqli_fetch_assoc($select_all_from_posts)
     
-    $user_id=$row['user_id'];
-    $username=$row['username'];
-   
-    $user_firstname=$row['user_firstname'];
-    $user_lastname=$row['user_lastname'];
-    $user_password=$row['user_password'];
-    $user_email=$row['user_email'];
-    $user_role=$row['user_role'];
+            $user_id=$row['user_id'];
+            $username=$row['username'];
+
+            $user_firstname=$row['user_firstname'];
+            $user_lastname=$row['user_lastname'];
+            $user_password_hashed=$row['user_password'];
+
+                //Reverse encryption
+
+            $salt=$row['randSalt'];
+              //  $user_password=crypt($)
+               // $user_password_unhashed=crypt($user_password_hashed,$salt);-->hashing is one way
+            $user_email=$row['user_email'];
+            $user_role=$row['user_role'];
     
     }
     if(isset($_POST['edit'])){
@@ -23,7 +29,7 @@ if(isset($_GET['u_id'])){
         $username=$_POST['username'];
         $user_firstname=$_POST['user_firstname'];
         $user_lastname=$_POST['user_lastname'];
-        $user_password=$_POST['user_password'];
+        $user_password_unhashed=$_POST['user_password'];
         $user_role=$_POST['user_role'];
         //$post_date=date('d-m-y');
         //$post_comment_count=4;
@@ -41,13 +47,26 @@ if(isset($_GET['u_id'])){
                 $post_image=$row['post_image'];
             }*/
             
+        
+           //-----PASSWORD ENCRYPTION-----------
+     $randSalt_query="SELECT randSalt FROM users";
+    $select_randsalt_query=mysqli_query($connection,$randSalt_query);
+    if(!$select_randsalt_query){
+        die("fetch randSalt value query failed".mysqli_error($connection));
+    }
+   
+    $row=mysqli_fetch_array($select_randsalt_query);
+    $salt=$row['randSalt'];
+    
+    //ENCRYPTION
+    $user_password_hashed=crypt($user_password_unhashed,$salt);
         }
 
           $query="UPDATE users SET ";
             $query.=" username='{$username}', ";
             $query.=" user_firstname='{$user_firstname}', ";
             $query.=" user_lastname='{$user_lastname}', ";
-            $query.=" user_password='{$user_password}', ";
+            $query.=" user_password='{$user_password_hashed}', ";
             $query.=" user_role='{$user_role}' ";
             $query.="WHERE user_id = '{$get_user_id}' ";
            
@@ -101,7 +120,7 @@ if(isset($_GET['u_id'])){
     
     <div class="form-group">
        <label for="user_password">Password</label>
-        <input type="text" class="form-control"  name="user_password" value="<?php echo $user_password;?>" >
+        <input type="password" class="form-control"  name="user_password" value="<?php echo $user_password_unhashed;?>" >
     </div>
     
     
