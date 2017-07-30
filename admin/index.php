@@ -1,8 +1,6 @@
 <?php include"includes/admin_header.php";?>
 
     <div id="wrapper">
-   
-
 
         <!-- Navigation -->
         
@@ -19,7 +17,7 @@
                             Welcome to Admin area
                             <small><?php echo $_SESSION['username']; ?></small>
                         </h1>
-                       
+                      
                     </div>
                 </div>
                 <!-- /.row -->

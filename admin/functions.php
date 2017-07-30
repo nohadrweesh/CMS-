@@ -57,5 +57,37 @@ function deleteCategories(){
 }
 }
 
+function users_online(){
+    global $connection;
+     //catch user id in admin area every time we start a session
+        
+        $session=session_id();
+        $time=time();
+        $time_out_in_seconds=60;
+        $time_out=$time-$time_out_in_seconds;
+        
+        $query="SELECT * FROM users_online WHERE session = '$session' ";
+       $result= mysqli_query($connection,$query);
+       // confirmQuery($result);
+        if(!$result){
+            die("failed".mysqli_error($connection));
+        }
+        $count=mysqli_num_rows($result);//how online 1 or 0
+        //echo $count;
+        if($count==NULL){
+            $result=mysqli_query($connection,"INSERT INTO users_online (session,time) VALUES ('$session','$time') ");
+            if(!$result){
+                die("failed".mysqli_error($connection));
+            }
+        }else{//just update time
+           mysqli_query($connection,"UPDATE users_online SET time-$time_out WHERE session='$session'  ");
+            
+            
+            
+        }//
+        $users_online_query= mysqli_query($connection,"SELECT * FROM users_online WHERE time >'$time_out'  ");
+       return  $users_count=mysqli_num_rows($users_online_query);
+}
+
 
 ?>
