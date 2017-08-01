@@ -62,8 +62,11 @@ if(isset($_GET['u_id'])){
     $user_password_hashed=crypt($user_password_unhashed,$salt);
         }*/
     
-        $user_password_hashed=password_hash($user_password_unhashed,PASSWORD_BCRYPT,array('cost'=>10));
+         $user_password_hashed=password_hash($user_password_unhashed,PASSWORD_BCRYPT,array('cost'=>10));
+    }else{
+        $user_password_unhashed=$user_password_hashed;
     }
+
           $query="UPDATE users SET ";
             $query.=" username='{$username}', ";
             $query.=" user_firstname='{$user_firstname}', ";
@@ -80,7 +83,7 @@ if(isset($_GET['u_id'])){
 ?>
  
    <form action="" method="post" enctype="multipart/form-data">
-   
+   <?php echo "hiii ";?>
     <div class="form-group">
        <label for="user_firstname">Firstname</label>
         <input type="text" class="form-control" name="user_firstname" value="<?php echo $user_firstname;?>">

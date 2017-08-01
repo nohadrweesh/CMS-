@@ -24,9 +24,27 @@ if(isset($_POST['login'])){
         $db_user_role=$row['user_role'];
         //echo "soo";
     }
-    
      //REVERSE ENCRYPTION
-    $password=crypt($password,$db_user_password);
+
+    //echo "soo";
+    if(password_verify($password,$db_user_password)){
+        //set session vars
+      //  echo "hii";
+       // $_SESSION['username']=$db_username;
+        $_SESSION['username']=$db_username;
+        $_SESSION['firstname']=$db_user_firstname;
+        $_SESSION['lastname']=$db_user_lastname;
+        $_SESSION['user_role']=$db_user_role;
+        
+      header("Location: ../admin")  ;
+    }else{
+//echo "bye";
+        header("Location: ../index.php")  ; 
+    }
+    
+    
+     //--------OLD REVERSE ENCRYPTION-----
+   /* $password=crypt($password,$db_user_password);
     //echo "soo";
     if($password==$db_user_password && $username==$db_username ){
         //set session vars
@@ -41,7 +59,7 @@ if(isset($_POST['login'])){
     }else{
 //echo "bye";
         header("Location: ../index.php")  ; 
-    }
+    }*/
     
 }
 

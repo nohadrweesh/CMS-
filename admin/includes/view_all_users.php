@@ -20,69 +20,42 @@
                                
 <?php
      $query="SELECT * FROM users";
+                               
     $select_all_from_users=mysqli_query($connection,$query);
-
+ //echo $count=mysqli_num_rows($select_all_from_users);
+                               
     while($row=mysqli_fetch_assoc($select_all_from_users)){
     
-    $user_id=$row['user_id'];
-    $username=$row['username'];
-    $user_password=$row['user_password'];
-    $user_firstname=$row['user_firstname'];
-    $user_lastname=$row['user_lastname'];
-    $user_email=$row['user_email'];
-    $user_image=$row['user_image'];
-    $user_role=$row['user_role'];
-        
-   
-        
-        echo "<tr>";
-    echo "<td>$user_id</td>";
-    echo "<td>$username</td>";
-    echo "<td>$user_firstname</td>";
-    echo "<td>$user_lastname</td>";
-    echo "<td>$user_email</td>";
-    echo "<td>$user_role</td>";
-   
-    
- /*$query="SELECT * FROM posts WHERE post_id = $comment_post_id" ;
-$result=mysqli_query($connection,$query);
- if(!$result){
-    die("Query failed".mysqli_error());
+            $user_id=$row['user_id'];
+            $username=$row['username'];
+            $user_password=$row['user_password'];
+            $user_firstname=$row['user_firstname'];
+            $user_lastname=$row['user_lastname'];
+            $user_email=$row['user_email'];
+           // $user_image=$row['user_image'];
+            $user_role=$row['user_role'];
 
-}
- while($row=mysqli_fetch_assoc($result)){
-     $post_title=$row['post_title'];
-     
-      echo "<td><a href='../post.php?p_id=$comment_post_id'>$post_title</a></td>";
- }   */
-    
-    
 
-   
-        
-   // echo "<td>$comment_date</td>";
-        
-        //echo CATEGORY NAME INSTEAD OF ID
-    /*$query="SELECT * FROM categories where cat_id={$post_category_id}" ;
-        $result=mysqli_query($connection,$query);
-        confirmQuery($result);
-        while($row=mysqli_fetch_assoc($result)){
-            $category_title=$row['cat_title'];
-        }*/
-        
-        
-   /*
-        echo "<td><a href='comments.php?approve=$comment_id'>Approve</a> </td>";
-    echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a> </td>";
-    
-    echo "<td><a href='comments.php?delete=$comment_id'>Delete</a> </td>";*/
-       echo "<td><a href='users.php?change_to_admin=$user_id'>Admin</a></td>";
-    echo "<td><a href='users.php?change_to_subscriber=$user_id'>Subscriber</a></td>";
-    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this user'); href='users.php?delete=$user_id'>Delete</a></td>";
-    echo "<td><a href='users.php?source=edit_user&u_id=$user_id'>Edit</a></td>";
-    //echo "<td><a href='categories.php?edit=$cat_id'>Edit</a></td></tr>";
-        echo "</tr>";
-    }                    
+
+                echo "<tr>";
+            echo "<td>$user_id</td>";
+            echo "<td>$username</td>";
+            echo "<td>$user_firstname</td>";
+            echo "<td>$user_lastname</td>";
+            echo "<td>$user_email</td>";
+            echo "<td>$user_role</td>";
+
+
+
+               echo "<td><a href='users.php?change_to_admin=$user_id'>Admin</a></td>";
+            echo "<td><a href='users.php?change_to_subscriber=$user_id'>Subscriber</a></td>";
+            echo "<td><a  href='users.php?delete=$user_id'>Delete</a></td>";
+            echo "<td><a href='users.php?source=edit_user&u_id=$user_id'>Edit</a></td>";
+            //echo "<td><a href='categories.php?edit=$cat_id'>Edit</a></td></tr>";
+                echo "</tr>";
+                
+    }     
+                                
 ?>
                                <!-- <tr>
                                     <td></td>

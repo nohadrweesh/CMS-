@@ -10,21 +10,24 @@ if(isset($_POST['submit'])){
     $password=mysqli_real_escape_string($connection,$password);
     $email=mysqli_real_escape_string($connection,$email);
     
-    $password=password_hash($password,PASSWORD_BCRYPT,array('cost'=>10));
+   
     
-    /$query="SELECT randSalt FROM users";
+    $query="SELECT randSalt FROM users";
     $select_randsalt_query=mysqli_query($connection,$query);
     if(!$select_randsalt_query){
         die("fetch randSalt value query failed".mysqli_error($connection));
     }
     //echo mysqli_num_rows($select_randsalt_query); -->NUM OF USERS IN DB
+     $password=password_hash($password,PASSWORD_BCRYPT,array('cost'=>10));
     
-    $row=mysqli_fetch_array($select_randsalt_query);
+    
+    //--------OLD PASSWORD ENCRYPTION--------
+   /* $row=mysqli_fetch_array($select_randsalt_query);
     $salt=$row['randSalt'];
     
     //ENCRYPTION
     $password=crypt($password,$salt);
-    
+    */
     $query="INSERT INTO users (username,user_password,user_email,user_role) ";
     $query.=" VALUES ('{$username}','{$password}','{$email}','subscriber')";
     

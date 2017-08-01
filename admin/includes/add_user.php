@@ -17,7 +17,7 @@ if(isset($_POST['submit'])){
     //$user_date=date('d-m-y');
     
     //-----PASSWORD ENCRYPTION-----------
-     $randSalt_query="SELECT randSalt FROM users";
+    /* $randSalt_query="SELECT randSalt FROM users";
     $select_randsalt_query=mysqli_query($connection,$randSalt_query);
     if(!$select_randsalt_query){
         die("fetch randSalt value query failed".mysqli_error($connection));
@@ -28,7 +28,9 @@ if(isset($_POST['submit'])){
     
     //ENCRYPTION
     $user_password=crypt($user_password,$salt);
+    */
     
+     $user_password=password_hash($user_password,PASSWORD_BCRYPT,array('cost'=>10));
     
     //move_uploaded_file($post_image_temp,"../images/$post_image");
     
@@ -48,7 +50,7 @@ if(isset($_POST['submit'])){
     </div>
     
     <div class="form-group">
-       <label for="user_lastname">Lasttname</label>
+       <label for="user_lastname">Lastname</label>
         <input type="text" class="form-control" name="user_lastname">
     </div>
     
@@ -74,7 +76,7 @@ if(isset($_POST['submit'])){
     
     <div class="form-group">
        <label for="user_password">Password</label>
-        <input type="text" class="form-control"  name="user_password" >
+        <input type="password" class="form-control"  name="user_password" >
     </div>
     
     
