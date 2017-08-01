@@ -1,10 +1,5 @@
-<?php 
-function confirmQuery($result){
-     global $connection;
-     if(!$result){
-        die("query failed ".mysqli_error($connection));
-        }
-}
+<?php //include"db.php";
+
 
 function add_categories(){
     global $connection;
@@ -17,7 +12,7 @@ function add_categories(){
         $query="INSERT INTO categories(cat_title) VALUES ('{$cat_title}')";
         $result=mysqli_query($connection,$query);
         if(!$result){
-        die("query failed ".mysqli_error($connection));
+          die("query failed ".mysqli_error($connection));
         }
     }
 
@@ -64,7 +59,7 @@ function users_online(){
         $session=session_id();
         $time=time();
         $time_out_in_seconds=60;
-        $time_out=$time-$time_out_in_seconds;
+        $time_out=$time - $time_out_in_seconds;
         
         $query="SELECT * FROM users_online WHERE session = '$session' ";
        $result= mysqli_query($connection,$query);
@@ -80,7 +75,7 @@ function users_online(){
                 die("failed".mysqli_error($connection));
             }
         }else{//just update time
-           mysqli_query($connection,"UPDATE users_online SET time-$time_out WHERE session='$session'  ");
+           mysqli_query($connection,"UPDATE users_online SET time= $time_out WHERE session='$session'  ");
             
             
             
@@ -88,6 +83,11 @@ function users_online(){
         $users_online_query= mysqli_query($connection,"SELECT * FROM users_online WHERE time >'$time_out'  ");
        return  $users_count=mysqli_num_rows($users_online_query);
 }
-
+function confirmQuery($result){
+     global $connection;
+     if(!$result){
+        die("query failed ".mysqli_error($connection));
+        }
+}
 
 ?>

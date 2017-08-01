@@ -10,7 +10,9 @@ if(isset($_POST['submit'])){
     $password=mysqli_real_escape_string($connection,$password);
     $email=mysqli_real_escape_string($connection,$email);
     
-    $query="SELECT randSalt FROM users";
+    $password=password_hash($password,PASSWORD_BCRYPT,array('cost'=>10));
+    
+    /$query="SELECT randSalt FROM users";
     $select_randsalt_query=mysqli_query($connection,$query);
     if(!$select_randsalt_query){
         die("fetch randSalt value query failed".mysqli_error($connection));
