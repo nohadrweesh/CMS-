@@ -97,13 +97,18 @@ if(isset($_GET['change_to_admin'])){
 
 //DELETING USER
 if(isset($_GET['delete'])){
-    
+    if(isset($_SESSION['user_role'])){
+        
+        if($_SESSION['user_role']=='admin'){
     $get_user_id=$_GET['delete'];
     
     $query=" DELETE FROM users WHERE user_id = {$get_user_id}";
     $delete_query_result=mysqli_query($connection,$query);
     confirmQuery($delete_query_result);
     header("Location: users.php");
+        }
+        
+    }
 }
 
 

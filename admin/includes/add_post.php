@@ -57,8 +57,8 @@ if(isset($_POST['submit'])){
     </div>-->
     
      <div class="form-group">
-       <label for="post_user">Post User </label>
-        <select name="post_category_id" id="">
+       <label for="post_author">Post User </label>
+        <select name="post_author" id="">
             <?php
             $query="SELECT * FROM users";
             $result=mysqli_query($connection,$query);
