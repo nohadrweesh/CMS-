@@ -12,11 +12,11 @@ if(isset($_POST['submit'])){
     
    
     
-    $query="SELECT randSalt FROM users";
+   /* $query="SELECT randSalt FROM users";
     $select_randsalt_query=mysqli_query($connection,$query);
     if(!$select_randsalt_query){
         die("fetch randSalt value query failed".mysqli_error($connection));
-    }
+    }*/
     //echo mysqli_num_rows($select_randsalt_query); -->NUM OF USERS IN DB
      $password=password_hash($password,PASSWORD_BCRYPT,array('cost'=>10));
     
