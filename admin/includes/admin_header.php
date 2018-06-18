@@ -3,7 +3,7 @@
 
 
 <?php ob_start(); ?>
-<?php session_start();//important to make session start all over the admin area?>
+<?php session_start();/*important to make session start all over the admin area*/?>
 <?php
 //CHECK user role
 if(!isset($_SESSION['user_role'])){
